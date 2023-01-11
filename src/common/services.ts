@@ -22,11 +22,13 @@ export async function trimWavAudioFile({
   endTime,
   file,
   trimmedFileName = 'trimmed_audio_file.wav',
+  fileType,
 }: {
   startTime: number;
   endTime: number;
   file: File;
   trimmedFileName?: string;
+  fileType: string;
 }): Promise<File> {
   const reader = new FileReader();
 
@@ -36,7 +38,13 @@ export async function trimWavAudioFile({
       if (!e?.target) return;
 
       const buffer = e.target.result as ArrayBuffer;
-      return trimArrayBuffer({ buffer, startTime, endTime, trimmedFileName })
+      return trimArrayBuffer({
+        buffer,
+        startTime,
+        endTime,
+        fileType,
+        trimmedFileName,
+      })
         .then(res)
         .catch(rej);
     });
@@ -48,11 +56,13 @@ function trimArrayBuffer({
   startTime,
   endTime,
   trimmedFileName,
+  fileType = 'audio/wav',
 }: {
   buffer: ArrayBuffer;
   startTime: number;
   endTime: number;
   trimmedFileName: string;
+  fileType: string;
 }): Promise<File> {
   return new Promise((res, rej) => {
     const audioContext = new AudioContext();
@@ -79,7 +89,7 @@ function trimArrayBuffer({
         encodeWav(newBuffer, (blob: Blob) => {
           res(
             new File([blob], trimmedFileName, {
-              type: 'audio/wav',
+              type: fileType,
             })
           );
         });
@@ -95,11 +105,13 @@ function trimArrayBuffer({
 export async function trimWavAudioSrc({
   startTime,
   endTime,
+  fileType,
   audioFileSrc,
   trimmedFileName = 'trimmed_audio_file.wav',
 }: {
   startTime: number;
   endTime: number;
+  fileType: string;
   audioFileSrc: string;
   trimmedFileName?: string;
 }): Promise<File> {
@@ -114,6 +126,7 @@ export async function trimWavAudioSrc({
         startTime,
         endTime,
         trimmedFileName,
+        fileType,
       })
         .then(res)
         .catch(rej);
