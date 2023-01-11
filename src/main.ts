@@ -111,5 +111,6 @@ formEl?.addEventListener('submit', async (e) => {
     const element = document.createElement('a');
     element.href = window.URL.createObjectURL(trimmedFile);
     element.click();
-  } catch (e) {}
+  } catch (e) {
+  }
 });
