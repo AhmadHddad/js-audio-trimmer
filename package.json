@@ -3,7 +3,9 @@
   "private": true,
   "author": "Ahmad-Hddad",
   "version": "0.0.0",
+  "contributors": ["https://github.com/AhmadHddad"],
   "type": "module",
+  "repository": "https://github.com/AhmadHddad/js-audio-trimmer",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",

@@ -1,7 +1,10 @@
 import './style.css';
 
 import Card from './components/card';
-import { getAudioDurationFromSrcOrFile } from './common/services';
+import {
+  getAudioDurationFromSrcOrFile,
+  trimWavAudioFile,
+} from './common/services';
 import { toHHMMSS } from './common/utils';
 const allowedFileTypes = ['audio/wav', 'audio/mpeg'];
 
@@ -31,9 +34,14 @@ Please select a vaild audio file first!</label>
 </div>
 </form>`;
 
+const Container = `<div>
+<h1 style="padding-block:16px;font-size:24px"> JS Audio Trimmer</h1>
+<hr style="color:#8080802b;margin-bottom:16px "/>
+${Form} </div>`;
+
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div style="height:600px; width:400px;">
-  ${Card(Form)}
+  <div style="height:400px; width:400px;">
+  ${Card(Container)}
   </div>
 `;
 
@@ -73,7 +81,7 @@ formEl?.addEventListener('change', async (e) => {
   }
 });
 
-formEl?.addEventListener('submit', (e) => {
+formEl?.addEventListener('submit', async (e) => {
   e.preventDefault();
   errorMsgObj.hide();
 
@@ -88,5 +96,20 @@ formEl?.addEventListener('submit', (e) => {
 
   if (!isValidFileType) return errorMsgObj.show();
 
+  const trimmedFileName =
+    prompt('What to you want to name the trimmed file?') ||
+    'trimmed_audio_file.wav';
 
+  try {
+    const trimmedFile = await trimWavAudioFile({
+      file,
+      startTime: Number(start),
+      endTime: Number(end),
+      trimmedFileName,
+    });
+
+    const element = document.createElement('a');
+    element.href = window.URL.createObjectURL(trimmedFile);
+    element.click();
+  } catch (e) {}
 });

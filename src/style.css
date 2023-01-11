@@ -103,7 +103,7 @@ p {
 }
 
 :root {
-  --input-color: #99a3ba;
+  --input-color: #3c455c;
   --input-border: #cdd9ed;
   --input-background: #fff;
   --input-placeholder: #cbd1dc;
@@ -216,4 +216,7 @@ body .form-group:not(:last-child) {
 .button {
   background-color: #646cff;
   color: white;
+}
+* {
+  margin: 0;
 }
