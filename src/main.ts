@@ -106,6 +106,7 @@ formEl?.addEventListener('submit', async (e) => {
       startTime: Number(start),
       endTime: Number(end),
       trimmedFileName,
+      fileType,
     });
 
     const element = document.createElement('a');
