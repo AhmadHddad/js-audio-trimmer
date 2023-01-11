@@ -1,3 +1,8 @@
-# js-audio-trimmer
+# JS-Audio-Trimmer
 
-[Edit on StackBlitz ⚡️](https://stackblitz.com/edit/vitejs-vite-fmxtem)
+## Description:
+
+A smiple way to trim audio files using nothing but pure Javascript and Typescript.
+The project uses vanilla TS so you can implement it in your favorite framework.
+
+![Screen-shot-1](https://i.ibb.co/p3KF3kN/js-audio-trimmer-1.png)

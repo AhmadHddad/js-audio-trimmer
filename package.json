@@ -1,6 +1,7 @@
 {
   "name": "js-audio-trimmer",
   "private": true,
+  "license": "MIT",
   "author": "Ahmad-Hddad",
   "version": "0.0.0",
   "contributors": ["https://github.com/AhmadHddad"],
