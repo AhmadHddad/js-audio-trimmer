@@ -20,7 +20,7 @@ const Form = `<form id="form"  style="height:100%;display:flex; flex-wrap:wrap; 
 <div style="padding-top:16px" >
 <p style="padding-bottom:8px">
 Select Audio File</p>
-<input  required name="file" type="file" accept=".wav, .mp3"/>
+<input id="file-input"  required name="file" type="file" accept=".wav, .mp3"/>
 <br/>
 <label id="duration-label"  style="display:none; font-size:smaller;">
 </label>
@@ -46,6 +46,7 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
 `;
 
 const formEl = document.getElementById('form');
+const fileInputEl = document.getElementById('file-input');
 const duratoinLabelEl = document.getElementById('duration-label');
 const errorMsgObj = {
   formErrMsgEl: document.getElementById('form-submit-error-msg'),
@@ -62,7 +63,7 @@ const errorMsgObj = {
   },
 };
 
-formEl?.addEventListener('change', async (e) => {
+fileInputEl?.addEventListener('change', async (e) => {
   const files = e.target.files as File[];
 
   if (!files.length) return errorMsgObj.show();
@@ -93,8 +94,8 @@ formEl?.addEventListener('submit', async (e) => {
   const file = files[0];
   const fileType = file.type;
   const isValidFileType = allowedFileTypes.indexOf(fileType) !== -1;
-
   if (!isValidFileType) return errorMsgObj.show();
+  console.log(fileType);
 
   const trimmedFileName =
     prompt('What to you want to name the trimmed file?') ||
